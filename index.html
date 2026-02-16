@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For JNU ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family: Arial, sans-serif;
+text-align:center;
+color:white;
+background: linear-gradient(135deg,#ff758c,#ff7eb3);
+overflow:hidden;
+}
+
+.page{display:none;padding:40px 20px;}
+.active{display:block;}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:#ff4d6d;
+color:white;
+margin-top:20px;
+font-size:16px;
+}
+
+input{
+padding:10px;
+border-radius:20px;
+border:none;
+text-align:center;
+}
+
+.cakeBox{
+font-size:120px;
+cursor:pointer;
+position:relative;
+}
+
+.candle{
+width:6px;
+height:30px;
+background:white;
+position:absolute;
+left:50%;
+top:-20px;
+transform:translateX(-50%);
+}
+
+.flame{
+width:12px;
+height:12px;
+background:orange;
+border-radius:50%;
+position:absolute;
+top:-12px;
+left:50%;
+transform:translateX(-50%);
+display:none;
+animation:flicker 0.3s infinite alternate;
+}
+
+@keyframes flicker{
+from{opacity:1;}
+to{opacity:0.5;}
+}
+
+.petals{
+position:absolute;
+font-size:20px;
+animation:fall 4s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(600px);}
+}
+
+.hearts{
+position:absolute;
+color:white;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+.quote{
+font-weight:bold;
+font-size:22px;
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="bgmusic" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5c5f6c5fa2.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PASSWORD PAGE -->
+<div class="page active" id="page1">
+<h2>Enter Password 🔐</h2>
+<input type="password" id="pass">
+<br>
+<button onclick="checkPass()">Open</button>
+</div>
+
+<!-- CAKE PAGE -->
+<div class="page" id="page2">
+<h2>Tap the cake 🎂</h2>
+<div class="cakeBox" onclick="cutCake()">
+🎂
+<div class="candle">
+<div class="flame" id="flame"></div>
+</div>
+</div>
+</div>
+
+<!-- BIRTHDAY MESSAGE -->
+<div class="page" id="page3">
+<p>
+Happy Birthday my love, my everything 🥺🫀
+<br><br>
+May Allah fulfill all your wishes and all your dreams ✨ You deserve the whole world and more. You are always in my prayers, every single day 🤲🏻💞
+<br><br>
+Right now I’m not with you… but my heart 💓, my brain 🧠, my soul 🫀 — they are always with you 🥺🫂
+<br><br>
+JNU🥺🫀…
+<br><br>
+Every time I close my eyes, your smile takes me into the most beautiful dreams 🌙✨ Your eyes are just magic ✨ and your smile is the best thing in my world 🥺💖
+<br><br>
+I love you sooo much meli jn 🥺🫀💞
+<br><br>
+I am always yours…
+<br><br>
+your babe 🥺💗 
+<br>
+your kukul 🥺🫶🏻 
+<br>
+your jalkukda 🥺💞 
+<br>
+your khinmoot 🥺🫂 
+<br>
+your hoon 🥺🫀 
+<br>
+your haput 🥺💖
+<br><br>
+Forever and always 🤍✨
+</p>
+<button onclick="nextPage(4)">Next</button>
+</div>
+
+<!-- APOLOGY PAGE -->
+<div class="page" id="page4">
+🧸
+<p>
+I know I hurt you every time… and I hate myself for that 🥺🫀
+<br><br>
+You don’t deserve the pain I give you. You only deserve love, peace, and happiness.
+<br><br>
+I’m really sorry… not just in words, but from my heart.
+<br><br>
+Please don’t think I don’t care — I care too much. I just fail sometimes.
+<br><br>
+I love you so much JNU🥺🫀
+</p>
+<button onclick="nextPage(5)">Next</button>
+</div>
+
+<!-- QUOTE PAGE -->
+<div class="page" id="page5">
+<p class="quote">
+"Love is never lost. If not reciprocated, it will flow back and soften and purify the heart."
+</p>
+</div>
+
+<script>
+
+function checkPass(){
+let p=document.getElementById("pass").value;
+if(p==="khinmaac"){
+document.getElementById("bgmusic").play();
+document.getElementById("flame").style.display="block";
+nextPage(2);
+}else{
+alert("Wrong password");
+}
+}
+
+function cutCake(){
+for(let i=0;i<30;i++){
+let petal=document.createElement("div");
+petal.className="petals";
+petal.style.left=Math.random()*100+"%";
+petal.innerHTML="🌸";
+document.body.appendChild(petal);
+}
+setTimeout(()=>{nextPage(3)},2000);
+}
+
+function nextPage(n){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("page"+n).classList.add("active");
+}
+
+for(let i=0;i<20;i++){
+let heart=document.createElement("div");
+heart.className="hearts";
+heart.style.left=Math.random()*100+"%";
+heart.style.fontSize=(10+Math.random()*20)+"px";
+heart.innerHTML="🤍";
+heart.style.animationDuration=(3+Math.random()*5)+"s";
+document.body.appendChild(heart);
+}
+
+</script>
+
+</body>
+</html>
