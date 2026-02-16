@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Zeeshana ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== CSS ===== */
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  min-height: 100vh;
+}
+
+.page { display: none; padding: 40px 20px; }
+.active { display: block; }
+
+button {
+  padding: 12px 25px;
+  border-radius: 25px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  margin-top: 20px;
+}
+
+.cakeBox { position: relative; display: inline-block; cursor: pointer; }
+.cakeBase { font-size: 120px; }
+
+.candle {
+  width: 6px;
+  height: 30px;
+  background: white;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.flame {
+  width: 12px;
+  height: 12px;
+  background: orange;
+  border-radius: 50%;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: flicker 0.5s infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: translateX(-50%) scale(1); }
+  to { transform: translateX(-50%) scale(1.2); }
+}
+
+.petal {
+  position: fixed;
+  top: -20px;
+  font-size: 20px;
+  animation: fall 5s linear forwards;
+}
+
+@keyframes fall { to { transform: translateY(100vh); } }
+
+.aestheticQuote {
+  font-weight: bold;
+  font-size: 22px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.6);
+}
+
+.romanticPage {
+  background: linear-gradient(135deg, #c94b7c, #4b134f);
+}
+
+.heart {
+  width: 120px;
+  height: 100px;
+  background: red;
+  margin: 60px auto;
+  position: relative;
+  transform: rotate(-45deg);
+  animation: beat 1s infinite;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  width: 120px;
+  height: 100px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart:before { top: -60px; left: 0; }
+.heart:after { left: 60px; top: 0; }
+
+@keyframes beat { 50% { transform: scale(1.2) rotate(-45deg); } }
+
+#floatingNames span {
+  position: fixed;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="birthdayMusic">
+  <source src="https://cdn.pixabay.com/download/audio/2023/03/21/audio_4b9c9e6f2c.mp3" type="audio/mp3">
+</audio>
+
+<audio id="emotionalMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2023/02/28/audio_c4a8b1c6f6.mp3" type="audio/mp3">
+</audio>
+
+<!-- PASSWORD -->
+<div id="passwordPage" class="page active">
+  <h2>Enter Password 💌</h2>
+  <input type="password" id="passwordInput" placeholder="Enter Password">
+  <button onclick="checkPassword()">Enter</button>
+  <p id="error"></p>
+</div>
+
+<!-- CAKE -->
+<div id="cakePage" class="page">
+  <h1>Happy Birthday 🎉</h1>
+  <div class="cakeBox" onclick="cutCake()">
+    <div class="cakeBase">🎂</div>
+    <div class="candle"></div>
+    <div class="flame"></div>
+  </div>
+  <p>Tap the cake 💖</p>
+</div>
+
+<!-- MESSAGE -->
+<div id="messagePage" class="page">
+  <h1>Happy Birthday my love, my everything 🥺🫀</h1>
+  <p>May Allah fulfill all your wishes and all your dreams ✨  
+  You deserve the whole world and more.  
+  You are always in my prayers, every single day 🤲🏻💞</p>
+
+  <p>Right now I’m not with you…  
+  but my heart 💓, my brain 🧠, my soul 🫀 —  
+  they are always with you 🥺🫂</p>
+
+  <p>JNU🥺🫀…</p>
+
+  <p>Every time I close my eyes, your smile takes me into the most beautiful dreams 🌙✨  
+  Your eyes are just magic ✨ and your smile is the best thing in my world 🥺💖</p>
+
+  <p>I love you sooo much meli jn 🥺🫀💞</p>
+
+  <p>I am always yours…</p>
+
+  <button onclick="nextPage('finalPage')">Finish ❤️</button>
+</div>
+
+<div id="finalPage" class="page">
+  <div class="heart"></div>
+  <h2 id="loveText"></h2>
+  <div id="floatingNames"></div>
+</div>
+
+<script>
+
+/* ===== JS ===== */
+
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  if (id === "finalPage") {
+    typeLove();
+    startFloating();
+  }
+}
+
+function checkPassword() {
+  if (document.getElementById("passwordInput").value === "khinmaac") {
+    showPage("cakePage");
+
+    let birthday = document.getElementById("birthdayMusic");
+    birthday.volume = 1;
+    birthday.play();
+
+    document.querySelector(".flame").style.opacity = "1";
+  } else {
+    document.getElementById("error").innerText = "Wrong Password";
+  }
+}
+
+function cutCake() {
+  let birthday = document.getElementById("birthdayMusic");
+  let emotional = document.getElementById("emotionalMusic");
+
+  birthday.pause();
+  emotional.volume = 0.6;
+  emotional.play();
+
+  showPage("messagePage");
+}
+
+function nextPage(id) { showPage(id); }
+
+function typeLove() {
+  let text = "I Love You Zeeshana ❤️";
+  let i = 0;
+  let target = document.getElementById("loveText");
+  target.innerHTML = "";
+
+  function typing() {
+    if (i < text.length) {
+      target.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, 80);
+    }
+  }
+  typing();
+}
+
+function startFloating() {
+  const names = ["Zeeshana 💖","Baby 🫶","Khinmaac 🥺"];
+  setInterval(() => {
+    let span = document.createElement("span");
+    span.innerText = names[Math.floor(Math.random()*names.length)];
+    span.style.left = Math.random()*100+"vw";
+    document.getElementById("floatingNames").appendChild(span);
+    setTimeout(()=>span.remove(),6000);
+  },400);
+}
+
+</script>
+
+</body>
+</html>
